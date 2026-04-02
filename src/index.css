@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap');
+@import "tailwindcss";
 
 @theme {
   --color-snow: #F8FAFC;
@@ -31,4 +31,93 @@
 
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 100ms !important; animation-duration: 100ms !important; }
+}
+
+/* ─── Container system ──────────────────────────────────────── */
+:root {
+  --container-xs:  480px;
+  --container-sm:  640px;
+  --container-md:  960px;
+  --container-lg: 1080px;
+  --container-pad:  24px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-lg);
+  padding: 0 var(--container-pad);
+  margin: 0 auto;
+}
+
+.container-xs { max-width: var(--container-xs); }
+.container-sm { max-width: var(--container-sm); }
+.container-md { max-width: var(--container-md); }
+
+/* ─── LearnScreen responsive layout ────────────────────────── */
+.learn-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Left column: stacks scroll area + action chips */
+.learn-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.learn-scroll {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.learn-action {
+  flex-shrink: 0;
+  border-top: 0.5px solid #E2E8F0;
+  background: #F8FAFC;
+}
+
+/* Right column: sandbox inline panel (desktop only) */
+.learn-right {
+  display: none;
+}
+
+/* Mobile bottom-sheet wrapper (hidden on desktop) */
+.sandbox-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .learn-body {
+    flex-direction: row;
+    max-width: var(--container-lg);
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .learn-left {
+    border-right: 0.5px solid #E2E8F0;
+  }
+
+  .learn-right {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #FFFFFF;
+    border-left: 0.5px solid #E2E8F0;
+  }
+
+  .learn-right-hidden {
+    display: none !important;
+  }
+
+  .sandbox-mobile {
+    display: none;
+  }
 }
