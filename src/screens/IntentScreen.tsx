@@ -70,7 +70,7 @@ export default function IntentScreen() {
           Good morning, Abidit.
         </h1>
         <p style={{ fontSize: '15px', color: '#475569', margin: '0 0 32px' }}>
-          What do you want to learn today?
+          Tell me what to build a course around.
         </p>
 
         {/* Topic input */}
@@ -149,7 +149,7 @@ export default function IntentScreen() {
         {/* CTA */}
         <div style={{ marginTop: '32px' }}>
           <Button
-            label="Build my course"
+            label="Generate my course"
             variant="primary"
             fullWidth
             onClick={() => navigate('/generating')}
@@ -163,7 +163,7 @@ export default function IntentScreen() {
               marginBottom: 0,
             }}
           >
-            Generates in ~5 seconds
+            AI-generated, adapts as you learn
           </p>
         </div>
         </div>

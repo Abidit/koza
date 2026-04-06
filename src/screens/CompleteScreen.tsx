@@ -78,8 +78,7 @@ export default function CompleteScreen({ flaggedConcepts }: Props) {
             maxWidth: '320px',
           }}
         >
-          You know the difference between Git and GitHub now. That clears up most confusion people
-          carry for years.
+          Course adapted to your signals — every tap shaped what came next.
         </p>
 
         {/* Stats row */}
@@ -132,7 +131,7 @@ export default function CompleteScreen({ flaggedConcepts }: Props) {
             label="Continue to module 5"
             variant="primary"
             fullWidth
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/path')}
           />
           <Button
             label="Take a break"

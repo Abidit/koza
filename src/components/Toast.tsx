@@ -1,28 +1,14 @@
-import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 interface ToastProps {
   message: string
   visible: boolean
-  onDismiss?: () => void
 }
 
-export default function Toast({ message, visible, onDismiss }: ToastProps) {
-  const [show, setShow] = useState(false)
-
-  useEffect(() => {
-    if (!visible) return
-    setShow(true)
-    const timer = setTimeout(() => {
-      setShow(false)
-      onDismiss?.()
-    }, 2800)
-    return () => clearTimeout(timer)
-  }, [visible]) // eslint-disable-line react-hooks/exhaustive-deps
-
+export default function Toast({ message, visible }: ToastProps) {
   return (
     <AnimatePresence>
-      {show && (
+      {visible && message && (
         <motion.div
           initial={{ y: -48, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

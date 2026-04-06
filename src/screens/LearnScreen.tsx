@@ -33,7 +33,7 @@ export default function LearnScreen({ session, setSession }: Props) {
     setOutputVisible(false)
   }, [currentPage, currentVariant])
 
-  // Fix 3: cleanup timer on unmount
+  // Cleanup timer on unmount
   useEffect(() => {
     return () => {
       if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current)
@@ -48,7 +48,7 @@ export default function LearnScreen({ session, setSession }: Props) {
   }
 
   function handleNext() {
-    // Fix 3: clear toast immediately on page change
+    // Clear toast on page change
     if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current)
     setToastVisible(false)
     setToastMessage('')
@@ -73,14 +73,11 @@ export default function LearnScreen({ session, setSession }: Props) {
     const next = session.explainMoreCount + 1
     const newVariant = next === 1 ? 'deeper' : 'visual'
     const msg = next === 1 ? "Let's go a level deeper." : "Let's try a completely different angle."
-    // Fix 4: debug log for flaggedConcepts flow
-    console.log('[koza] explain click — count:', next, 'pageId:', pageData.id, 'willFlag:', next >= 2)
     setSession(s => {
       const updatedFlags =
         next >= 2 && !s.flaggedConcepts.includes(pageData.id)
           ? [...s.flaggedConcepts, pageData.id]
           : s.flaggedConcepts
-      console.log('[koza] flaggedConcepts now:', updatedFlags)
       return {
         ...s,
         explainMoreCount: next,
@@ -105,7 +102,7 @@ export default function LearnScreen({ session, setSession }: Props) {
   const isLastPage = currentPage === 4
   const primaryChipLabel = isLastPage ? 'Finish module' : 'Got it — next page'
 
-  // Fix 1+5: sandbox panel content — rendered inline on desktop, in sheet on mobile
+  // Sandbox panel — inline on desktop, bottom sheet on mobile
   const sandboxPanel = (
     <>
       {/* Header — fixed 48px */}
@@ -273,16 +270,12 @@ export default function LearnScreen({ session, setSession }: Props) {
 
       {/* Body */}
       <div className="learn-body">
-        {/* Fix 5: left column = scroll content (top) + action chips (bottom) */}
+        {/* Left column: scroll content + action chips */}
         <div className="learn-left">
           <div className="learn-scroll">
-            {/* Fix 2: reserved 52px in-flow toast slot — no content jump */}
+            {/* Reserved toast slot — prevents content jump */}
             <div style={{ height: '52px', padding: '6px 24px 0', overflow: 'hidden' }}>
-              <Toast
-                message={toastMessage}
-                visible={toastVisible}
-                onDismiss={() => setToastVisible(false)}
-              />
+              <Toast message={toastMessage} visible={toastVisible} />
             </div>
 
             <AnimatePresence mode="wait">
@@ -363,7 +356,7 @@ export default function LearnScreen({ session, setSession }: Props) {
             </AnimatePresence>
           </div>
 
-          {/* Fix 5: action chips pinned to bottom of left column */}
+          {/* Action chips — pinned to bottom */}
           <div className="learn-action" style={{ padding: '14px 24px 32px' }}>
             <p style={{ fontSize: '11px', color: '#94A3B8', margin: '0 0 10px' }}>
               How did that land?
@@ -405,13 +398,13 @@ export default function LearnScreen({ session, setSession }: Props) {
           </div>
         </div>
 
-        {/* Fix 5: right column — inline sandbox on desktop, hidden when closed */}
+        {/* Right column — sandbox panel (desktop) */}
         <div className={`learn-right${!sandboxOpen ? ' learn-right-hidden' : ''}`}>
           {sandboxPanel}
         </div>
       </div>
 
-      {/* Fix 1+5: mobile-only sandbox bottom sheet (hidden on desktop via CSS) */}
+      {/* Sandbox bottom sheet (mobile only) */}
       <div className="sandbox-mobile">
         <AnimatePresence>
           {sandboxOpen && (
