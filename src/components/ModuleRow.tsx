@@ -3,10 +3,15 @@ interface ModuleRowProps {
   title: string
   duration: string
   isActive: boolean
+  isLocked: boolean
   isLast: boolean
 }
 
-export default function ModuleRow({ number, title, duration, isActive, isLast }: ModuleRowProps) {
+export default function ModuleRow({ number, title, duration, isActive, isLocked, isLast }: ModuleRowProps) {
+  const titleColor = isLocked ? '#94A3B8' : '#0F172A'
+  const circleBg = isLocked ? '#E2E8F0' : '#0F172A'
+  const circleText = isLocked ? '#94A3B8' : '#F8FAFC'
+
   return (
     <div
       style={{
@@ -16,6 +21,7 @@ export default function ModuleRow({ number, title, duration, isActive, isLast }:
         padding: '10px 0 10px 14px',
         borderLeft: isActive ? '2px solid #1E40AF' : '2px solid transparent',
         fontFamily: 'Inter, sans-serif',
+        opacity: isLocked ? 0.7 : 1,
       }}
     >
       {/* Left: number circle + connector */}
@@ -33,8 +39,8 @@ export default function ModuleRow({ number, title, duration, isActive, isLast }:
             width: '24px',
             height: '24px',
             borderRadius: '9999px',
-            backgroundColor: '#0F172A',
-            color: '#F8FAFC',
+            backgroundColor: circleBg,
+            color: circleText,
             fontSize: '11px',
             fontWeight: 500,
             display: 'flex',
@@ -60,7 +66,7 @@ export default function ModuleRow({ number, title, duration, isActive, isLast }:
 
       {/* Right: title + duration */}
       <div style={{ paddingTop: '2px' }}>
-        <p style={{ fontSize: '13px', fontWeight: 500, color: '#0F172A', margin: 0, lineHeight: '1.4' }}>
+        <p style={{ fontSize: '13px', fontWeight: 500, color: titleColor, margin: 0, lineHeight: '1.4' }}>
           {title}
         </p>
         <p style={{ fontSize: '11px', color: '#94A3B8', margin: '3px 0 0', lineHeight: '1.4' }}>

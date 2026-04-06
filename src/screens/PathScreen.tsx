@@ -67,10 +67,10 @@ export default function PathScreen() {
           margin: '0 0 4px',
         }}
       >
-        Here's what we'd suggest
+        Your adaptive course path
       </h1>
       <p style={{ fontSize: '13px', color: '#475569', margin: '0 0 20px' }}>
-        8 modules · 29 pages · live terminal included
+        8 modules · 29 pages · adapts to your pace
       </p>
 
       {/* Module list */}
@@ -82,6 +82,7 @@ export default function PathScreen() {
             title={mod.title}
             duration={mod.duration}
             isActive={mod.number === 4}
+            isLocked={mod.number > 4}
             isLast={i === MODULES.length - 1}
           />
         ))}

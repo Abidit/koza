@@ -22,7 +22,11 @@ export default function App() {
         />
         <Route
           path="/complete"
-          element={<CompleteScreen flaggedConcepts={session.flaggedConcepts} />}
+          element={
+            <CompleteScreen
+              flaggedConcepts={session.flaggedConcepts}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>
